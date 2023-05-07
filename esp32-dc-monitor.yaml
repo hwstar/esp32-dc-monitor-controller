@@ -1,0 +1,234 @@
+#
+# esphome
+#
+
+esphome:
+  name: esp32-dc-monitor
+  platform: ESP32
+  board: esp32dev
+  name_add_mac_suffix: true # Adds a 6 digit MAC suffix to the name defined above. Can be used to distinguish between multiple controllers.
+  project:
+    name: esphome.project-template
+    version: "1.0"
+#
+# WiFi
+#
+
+wifi:
+   networks:
+   - ssid: !secret wifi_ssid
+     password: !secret wifi_password
+
+#
+# webserver
+#
+
+web_server:
+  port: 80
+# auth:
+#    username: admin
+#    password: !secret web_password
+
+#
+# logger
+#
+
+logger:
+  level: INFO
+
+#
+# api
+#
+
+api:
+  reboot_timeout: 24h
+#
+#  Uncomment the lines below to enable encrypted communication
+#  between homeassistant and the sprinkler controller.
+#  You'll need to change your encryption key in secrets.yaml,
+#  and give homeassistant the encryption key.
+#
+#  encryption:
+#          key: !secret api_key
+
+
+#
+# ota
+#
+
+ota:
+  password: !secret esphome_ota_password
+
+#
+# Dashboard import
+#
+
+dashboard_import:
+  package_import_url: github://hwstar/9-Valve-Sprinkler-Controller/esp32-sprinkler.yaml@main
+
+
+#
+# I2C bus definition
+#
+
+
+i2c:
+  sda: 21
+  scl: 22
+  id: bus_a
+
+
+#
+# Update interval for the NTC thermistors
+#
+
+interval:
+  - interval: 1s
+    then:
+      - component.update: source_sensor_1
+      - component.update: source_sensor_2
+
+
+#
+# Switch definition
+#
+
+switch:
+  - platform: gpio
+    id: relay_k101
+    name: "Relay 1"
+    pin:
+      number: GPIO13
+      mode:
+        output: true
+      inverted: false
+
+  - platform: gpio
+    id: relay_k102
+    name: "Relay 2"
+    pin:
+      number: GPIO14
+      mode:
+        output: true
+      inverted: false
+
+
+sensor:
+#
+# Template sensors: Power Calculations
+#
+# The INA226 watts register seems to return values which don't
+# make sense, so we derive watts from volts and amps here.
+#
+
+  - platform: template
+    name: "INA226 #1 Power"
+    unit_of_measurement: "W"
+    lambda: |-
+      return id(ina226_1_voltage).state * abs(id(ina226_1_current).state);
+
+    update_interval: 1s
+
+  - platform: template
+    name: "INA226 #2 Power"
+    unit_of_measurement: "W"
+    lambda: |-
+      return id(ina226_2_voltage).state * abs(id(ina226_2_voltage).state);
+
+    update_interval: 1s
+
+#
+# INA226 current sensors
+#
+
+# INA226 #1
+  - platform: ina226
+    address: 0x40
+    shunt_resistance: 1mohm
+    max_current: 10A
+    current:
+      name: "INA226 #1 Current"
+      id: ina226_1_current
+    bus_voltage:
+      name: "INA226 #1 Bus Voltage"
+      id: ina226_1_voltage
+    update_interval: 1s
+
+# INA226 #2
+  - platform: ina226
+    address: 0x41
+    shunt_resistance: 1mohm
+    max_current: 10A
+    current:
+      name: "INA226 #2 Current"
+      id: ina226_2_current
+    bus_voltage:
+      name: "INA226 #2 Bus Voltage"
+      id: ina226_2_voltage
+    update_interval: 1s
+
+
+
+#
+# Each NTC thermistor requires
+# 3 platform stanzas, ntc, resistance and adc.
+#
+
+
+# Thermistor on J102
+  - platform: ntc
+    sensor: ntc_res_1
+    calibration:
+      b_constant: 3435
+      reference_temperature: 25°C
+      reference_resistance: 10kOhm
+    name: NTC Temp 1
+    id: ntc_temp_1
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+
+  - platform: resistance
+    id: ntc_res_1
+    sensor: source_sensor_1
+    configuration: DOWNSTREAM
+    resistor: 10.0kOhm
+  - platform: adc
+    id: source_sensor_1
+    attenuation: 11dB
+    pin: GPIO34
+
+
+# Thermistor on J103
+  - platform: ntc
+    sensor: ntc_res_2
+    calibration:
+      b_constant: 3435
+      reference_temperature: 25°C
+      reference_resistance: 10kOhm
+    name: NTC Temp 2
+    id: ntc_temp_2
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+
+
+  - platform: resistance
+    id: ntc_res_2
+    sensor: source_sensor_2
+    configuration: DOWNSTREAM
+    resistor: 10.0kOhm
+
+  - platform: adc
+    id: source_sensor_2
+    attenuation: 11dB
+    pin: GPIO35
+
+
+
+
+
+
+
