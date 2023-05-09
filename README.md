@@ -62,7 +62,14 @@ Below is the pinout of the serial connector J301.
 
 Connect your 3.3V serial adapter to pins 1,4, and 5.Connecting RXD of the adapter to pin 5, TXD of the adapter to pin 4, and ground to pin 1.
 
-Apply Power (10.8-30VDC) using pins 1 and 2 of the 12 pin pluggable connector, observing the correct polarity.
+Apply Power (10.8-30VDC) using pins 1 and 2 of the 12 pin pluggable connector, observing the correct polarity. Power pins are shown below:
+
+|PIN| Signal|
+|---|------------------------- |
+| 1 | Positive 10.8-30VDC |
+| 2 | Ground |
+
+Pin 1 is the left most pin on the 12 pin pluggable connector with the DCMC2 oriented as shown in the above picture. 
 
 The two push buttons (accessible with the case off), EN and BOOT are used to place the ESP32 in upload mode. Hold the BOOT button, then press and release
 the EN button. This causes the ESP32 to enter upload mode.
@@ -95,7 +102,7 @@ The hardware can be purchased from me directly.
 Hardware included in the kit:
 
 1. 1 ea. Main PCB.
-2. 1 ea. ABS plastic enclosure and graphic overlay sticker and 4 retaining screws.
+2. 1 ea. ABS plastic enclosure, graphic overlay sticker and 4 retaining screws.
 3. 1 ea. mating 12 pin screw terminal pluggable power connector.
 4. 2 ea. 3 pin JST connector and pigtail.
 
