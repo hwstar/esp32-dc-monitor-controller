@@ -44,38 +44,7 @@ familiar with it before purchasing a board. A link to the the programming docume
 
 ### Uploading
 
-
-You'll need a 3.3V USB serial cable to upload the firmware. The J301 header is pinned out for a FTDI cable, but you can use any 3.3V serial adapter with jumper wires.
-
-Below is the pinout of the serial connector J301.
-
-
-|PIN| Signal|
-|---|------------------------- |
-| 1 | Ground |
-| 2 | No connection |
-| 3 | No Connection |
-| 4 | RXD referenced to ESP32 |
-| 5 | TXD referenced to ESP32 |
-| 6 | No Connection |
-
-
-Connect your 3.3V serial adapter to pins 1,4, and 5.Connecting RXD of the adapter to pin 5, TXD of the adapter to pin 4, and ground to pin 1.
-
-Apply Power (10.8-30VDC) using pins 1 and 2 of the 12 pin pluggable connector, observing the correct polarity. Power pins are shown below:
-
-|PIN| Signal|
-|---|------------------------- |
-| 1 | Positive 10.8-30VDC |
-| 2 | Ground |
-
-Pin 1 is the left most pin on the 12 pin pluggable connector with the DCMC2 oriented as shown in the above picture. 
-
-The two push buttons (accessible with the case off), EN and BOOT are used to place the ESP32 in upload mode. Hold the BOOT button, then press and release
-the EN button. This causes the ESP32 to enter upload mode.
-
-You are now ready to upload a custom version of ESPHome to the device.
-
+The Wiki contains detailed firmware uploading instructions for the DCMC2. 
 
 ### Customization
 
