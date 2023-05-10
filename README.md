@@ -54,7 +54,7 @@ The firmware consists of ESPHome platform compiled with a user-customizable YAML
 
 Before compiling, rename secrets-sample.yaml to secrets.yaml, and change items in secrets.yaml to suit your requirements.
 
-Once compiled the firmware is installed via a 3.3V serial cable. J201 on the board is a male header which is compatible with FTDI serial cables such as FTDI part number TTL-232R-3V3. 
+Once compiled the firmware is installed via a 3.3V serial cable. J301 on the board is a male header which is compatible with FTDI serial cables such as FTDI part number TTL-232R-3V3. 
 
 For firmware upload instructions please refer to the wiki.
 
