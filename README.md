@@ -83,7 +83,9 @@ Not supplied in the kit:
 5. Wood screws for attaching the controller to a backboard.
 6. Current Shunts/Sensing resistors.
 
+## Wiki
 
+The Project Wiki contains wiring diagrams, connector pinouts, and GPIO's used by the DCMC2. It can be accessed from the Wiki menu item in this repository.
 
 
 
