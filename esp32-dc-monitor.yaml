@@ -64,7 +64,7 @@ ota:
 #
 
 dashboard_import:
-  package_import_url: github://hwstar/9-Valve-Sprinkler-Controller/esp32-sprinkler.yaml@main
+  package_import_url: github://hwstar/esp32-dc-monitor-controller/esp32-dc-monitor.yaml@main
 
 
 #
@@ -133,7 +133,7 @@ sensor:
     name: "INA226 #2 Power"
     unit_of_measurement: "W"
     lambda: |-
-      return id(ina226_2_voltage).state * abs(id(ina226_2_voltage).state);
+      return id(ina226_2_voltage).state * abs(id(ina226_2_current).state);
 
     update_interval: 1s
 
