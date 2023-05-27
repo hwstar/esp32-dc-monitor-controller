@@ -9,9 +9,12 @@
 
 ![alt text](https://github.com/hwstar/esp32-dc-monitor-controller/blob/main/assets/made-for-esphome-black-on-white.png)
 
+![alt text](https://github.com/hwstar/esp32-dc-monitor-controller/blob/main/assets/sensors.png)
+
 
 This is the code and documentation repository for a DC Monitor/Controller
-controller kit based on an ESP32. It has the following features:
+controller kit based on an ESP32. It is provided in kit form and completely assembled except for
+two tact switches which need to be soldered on to the board. It has the following features:
 
 * ESP32 Microcontroller
 * Provides 2 current/voltage monitoring channels using the Texas Instruments INA226 voltage and current monitoring chip.
@@ -25,7 +28,7 @@ controller kit based on an ESP32. It has the following features:
 * Runs off of 10.8 to 30VDC supplied by an external power source.
 
 
-This hardware will be for sale on Tindie when testing is completed.
+This hardware is for sale on Tindie.
 It is primarily designed to work with [ESPHome](https://github.com/esphome/esphome)
 
 ## Disclaimer
@@ -73,6 +76,7 @@ Hardware included in the kit:
 1. 1 ea. Main PCB.
 2. 1 ea. ABS plastic enclosure, graphic overlay sticker and 4 retaining screws.
 3. 1 ea. mating 12 pin screw terminal pluggable power connector.
+4. 2 ea. 6mm Tact switches to be soldered in to  EN and BOOT footprints the board.
 4. 2 ea. 3 pin JST connector and pigtail.
 
 Not supplied in the kit:
